@@ -10,7 +10,7 @@ var number = randomNumber(1, 100)
 
 func randomNumber(min, max int) int {
 	rand.Seed(time.Now().Unix())
-	time.Sleep(time.Second * 1)
+	time.Sleep(time.Millisecond * 500)
 
 	return rand.Intn(max-min) + min
 }
@@ -69,6 +69,7 @@ func (g *Game) Eval() bool {
 		g.Big = g.Guess
 		fmt.Println("Lower than that!")
 	} else {
+		g.Guessed = true
 		return true
 	}
 	return false
@@ -81,9 +82,7 @@ func (g *Game) TwoPlayers() {
 
 		g.GetGuess(counter)
 
-		if g.Eval() {
-			g.Guessed = true
-		}
+		g.Eval()
 	}
 }
 
@@ -92,21 +91,15 @@ func (g *Game) VsAi() {
 		g.GetGuess(1)
 
 		if g.Eval() {
-			g.Guessed = true
 			fmt.Println("Congrats you guessed it")
-			break
 		}
-
-		time.Sleep(time.Second * 1)
 
 		// AI guess
 		g.Guess = randomNumber(g.Low, g.Big)
 		fmt.Println("\nThe AI guessed: ", g.Guess)
 
 		if g.Eval() {
-			g.Guessed = true
 			fmt.Println("Sorry the ai guessed it")
-			break
 		}
 	}
 
