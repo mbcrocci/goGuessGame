@@ -48,7 +48,6 @@ func (g *Game) Start() {
 	switch i {
 	case 1:
 		g.TwoPlayers()
-
 	case 2:
 		g.VsAi()
 	}
@@ -81,32 +80,32 @@ func (g *Game) TwoPlayers() {
 		counter++
 
 		g.GetGuess(counter)
-
 		g.Eval()
 	}
 }
 
 func (g *Game) VsAi() {
 	for !g.Guessed {
-		g.GetGuess(1)
-
+		g.GetGuess(1) // always player one
 		if g.Eval() {
 			fmt.Println("Congrats you guessed it")
 		}
-
 		// AI guess
 		g.Guess = randomNumber(g.Low, g.Big)
 		fmt.Println("\nThe AI guessed: ", g.Guess)
-
 		if g.Eval() {
 			fmt.Println("Sorry the ai guessed it")
 		}
 	}
-
 }
 
 func NewGame() *Game {
-	return &Game{0, 1, 100, false}
+	return &Game{
+		Guess:   0,
+		Low:     1,
+		Big:     100,
+		Guessed: false,
+	}
 }
 
 func main() {
