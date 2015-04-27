@@ -89,12 +89,14 @@ func (g *Game) VsAi() {
 		g.GetGuess(1) // always player one
 		if g.Eval() {
 			fmt.Println("Congrats you guessed it")
+			break
 		}
 		// AI guess
 		g.Guess = randomNumber(g.Low, g.Big)
 		fmt.Println("\nThe AI guessed: ", g.Guess)
 		if g.Eval() {
 			fmt.Println("Sorry the ai guessed it")
+			break
 		}
 	}
 }
