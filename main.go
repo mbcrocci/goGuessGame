@@ -82,6 +82,7 @@ func (g *Game) TwoPlayers() {
 		g.GetGuess(counter)
 		g.Eval()
 	}
+	fmt.Println("Congrats player ", playerID(counter))
 }
 
 func (g *Game) VsAi() {
